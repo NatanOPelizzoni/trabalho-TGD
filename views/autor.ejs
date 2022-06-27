@@ -1,0 +1,39 @@
+<!-- Inclusão do Header -->
+    <%- include('include/_header') %>
+<!-- /Inclusão do Header -->
+
+    <!-- Main Site -->
+        <main id="site-main">
+            <div class="container">
+                <div class="box-nav d-flex justify-between">
+                    <a href="/add_autor" class="border-shadow">
+                        <span class="text-gradient"><i class="fas fa-user-plus"></i> Novo Autor</span>
+                    </a>
+                </div>
+
+                <!-- form handling -->
+                    <form action="/" method="POST">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%- include('include/autor/_show_autor') %>
+                            </tbody>
+
+                        </table>
+                    </form>
+                <!-- /form handling -->
+
+            </div>
+        </main>
+    <!-- /Main Site -->
+
+<!-- Inclusão do Footer -->
+    <%- include('include/_footer') %>
+<!-- /Inclusão do Footer -->
