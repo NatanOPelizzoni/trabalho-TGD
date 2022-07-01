@@ -6,8 +6,8 @@
         <main id="site-main">
             <div class="container">
                 <div class="box-nav d-flex justify-between">
-                    <a href="/add_autor" class="border-shadow">
-                        <span class="text-gradient"><i class="fas fa-user-plus"></i> Novo Autor</span>
+                    <a href="/add_locacao" class="border-shadow">
+                        <span class="text-gradient"><i class="fas fa-ticket"></i> Nova Locação</span>
                     </a>
                 </div>
 
@@ -17,13 +17,15 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nome</th>
+                                    <th>Aluno</th>
+                                    <th>Livro</th>
+                                    <th>Data Retirada</th>
                                     <th class="th-acoes">Ações</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <%- include('include/autor/_show_autor') %>
+                                <%- include('include/locacao/_show_locacao') %>
                             </tbody>
 
                         </table>

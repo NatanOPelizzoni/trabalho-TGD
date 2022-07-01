@@ -1,9 +1,9 @@
-<form method="POST" id="add_autor">
+<form method="POST" id="<%- acao %>_autor">
     <div class="form_autor">
+        <input type="hidden" name="id" id="id" value="">
         <div class="form-group">
             <label for="nome" class="text-light">Nome</label>
-            <input type="hidden" name="id" value="">
-            <input type="text" name="nome" value="">
+            <input type="text" name="nome" id="nome" value="">
         </div>
 
         <div class="form-group">

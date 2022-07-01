@@ -75,6 +75,11 @@ a {
     margin: 0em 1em;
 }
 
+#header nav a:hover {
+    padding-bottom: 5px;
+    box-shadow: inset 0 -2px 0 0 #333;
+}
+
 #site-main{
     margin-top: 6em;
     font-family: 'Barlow', sans-serif;
@@ -135,13 +140,13 @@ table{
     margin: auto;
 }
 
-#update_autor .form-group,
-#add_autor .form-group{
+.form_update .form-group,
+.form_add .form-group{
     margin: 0.4em 0;
 }
 
-#update_autor .form-group input[type="text"],
-#add_autor .form-group input[type="text"]{
+.form_update .form-group input,select,
+.form_add .form-group input,select{
     width: 100%;
     padding: .6em 1em;
     margin: .5em 0;
@@ -151,8 +156,8 @@ table{
     border-radius: .2em;
 }
 
-#update_autor .form-group .btn,
-#add_autor .form-group .btn{
+.form_update .form-group .btn,
+.form_add .form-group .btn{
     width: 100%;
     padding: .9em 1em;
     background-color:#16db93; 
@@ -164,8 +169,12 @@ table{
     margin: .5em 0;
 }
 
-#update_autor .form-group .btn:hover,
-#add_autor .form-group .btn:hover{
+.form_update .form-group .btn:hover,
+.form_add .form-group .btn:hover{
     background-color: var(--dark);
     color: var(--border);
+}
+
+.th-acoes{
+    width: 8vw;
 }

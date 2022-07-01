@@ -1,0 +1,39 @@
+<form method="POST" id="<%- acao %>_livro">
+    <div class="form_livro">
+        <input type="hidden" name="id" id="id" value="">
+        <div class="form-group">
+            <label for="titulo" class="text-light">Título</label>
+            <input type="text" name="titulo" id="titulo" value="">
+        </div>
+
+        <div class="form-group">
+            <label for="paginas" class="text-light">Página(s)</label>
+            <input type="text" name="paginas" id="paginas" value="">
+        </div>
+
+        <div class="form-group">
+            <label for="genero" class="text-light">Gênero(s)</label>
+            <input type="text" name="genero" id="genero" value="">
+        </div>
+        
+        <div class="form-group">
+            <label for="autor" class="text-light">Autor</label>
+            <select name="autor" id="autor">
+                <option value="">Selecione</option>
+                <option value="autor1">Autor 1</option>
+                <option value="autor2">Autor 2</option>
+                <option value="autor3">Autor 3</option>
+                <option value="autor4">Autor 4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="datalancamento" class="text-light">Data Lançamento</label>
+            <input type="date" name="datalancamento" id="datalancamento" value="">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn text-dark add">Salvar</button>
+        </div>
+    </div>
+</form>

@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="box-nav d-flex justify-between">
                     <a href="/autor" class="border-shadow">
-                        <span class="text-gradient"><i class="fas fa-angle-double-left"></i> Todos Autores</span>
+                        <span class="text-gradient"><i class="fas fa-angle-double-left"></i> Voltar</span>
                     </a>
                 </div>
 
@@ -16,21 +16,12 @@
                     <span class="text-light">Use abaixo para editar o autor</span>
                 </div>
 
-                <!-- Inclusão do form do autor -->
-                    <form method="POST" id="update_autor">
-                        <div class="form_autor">
-                            <div class="form-group">
-                                <label for="nome" class="text-light">Nome</label>
-                                <input type="hidden" name="id" value="">
-                                <input type="text" name="nome" value="">
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn text-dark update">Salvar</button>
-                            </div>
-                        </div>
-                    </form>
-                <!-- /Inclusão do form do autor -->
+                <div class="form_update">
+                    <!-- Inclusão do form do autor -->
+                        <%- include('include/autor/_form_autor', {acao: 'update'}) %>
+                    <!-- /Inclusão do form do autor -->
+                </div>
+                
             </div>
         </main>
     <!-- /Main Site -->

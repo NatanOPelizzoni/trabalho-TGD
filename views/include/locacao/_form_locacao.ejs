@@ -1,0 +1,36 @@
+<form method="POST" id="<%- acao %>_locacao">
+    <div class="form_locacao">
+        <input type="hidden" name="id" id="id" value="">
+
+        <div class="form-group">
+            <label for="aluno" class="text-light">Aluno</label>
+            <select name="aluno" id="aluno">
+                <option value="">Selecione</option>
+                <option value="aluno1">Aluno 1</option>
+                <option value="aluno2">Aluno 2</option>
+                <option value="aluno3">Aluno 3</option>
+                <option value="aluno4">Aluno 4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="livro" class="text-light">Livro</label>
+            <select name="livro" id="livro">
+                <option value="">Selecione</option>
+                <option value="livro1">Livro 1</option>
+                <option value="livro2">Livro 2</option>
+                <option value="livro3">Livro 3</option>
+                <option value="livro4">Livro 4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="dataretirada" class="text-light">Data Retirada</label>
+            <input type="date" name="dataretirada" id="dataretirada" value="">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn text-dark <%- acao %>">Salvar</button>
+        </div>
+    </div>
+</form>
