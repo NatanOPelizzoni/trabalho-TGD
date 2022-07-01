@@ -23,21 +23,8 @@ app.use('/css', express.static(path.resolve(__dirname, 'assets/css')));
 app.use('/img', express.static(path.resolve(__dirname, 'assets/img')));
 app.use('/js', express.static(path.resolve(__dirname, 'assets/js')));
 
-app.get('/', (req, res)=>{
-    res.render('autor');
-});
-
-app.get('/autor', (req, res)=>{
-    res.render('autor');
-});
-
-app.get('/add_autor', (req, res)=>{
-    res.render('add_autor');
-});
-
-app.get('/update_autor', (req, res)=>{
-    res.render('update_autor');
-});
+//laod rotas
+app.use('/', require('./server/routes/router'));
 
 app.listen(PORT, ()=>{
     console.log(`Servidor rodando no endereço http://localhost:${PORT}`);
