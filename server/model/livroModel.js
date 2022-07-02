@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
     genero: String,
     autorId: {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'autordb'
+        ref: 'autordb',
+        required: true
     }
 });
 
