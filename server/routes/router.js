@@ -3,6 +3,11 @@ const route = express.Router();
 
 const services = require('../services/render');
 
+const autorController = require('../controller/autorController');
+const alunoController = require('../controller/alunoController');
+const livroController = require('../controller/livroController');
+const locacaoController = require('../controller/locacaoController');
+
 //Rota Index
 
 /**
@@ -90,5 +95,37 @@ route.get('/add_locacao', services.add_locacao);
 *  @method GET /update_locacao
 */
 route.get('/update_locacao', services.update_locacao);
+
+
+//API
+
+//Rotas Autor
+
+route.post('/api/autor', autorController.create);
+route.get('/api/autor', autorController.find);
+route.put('/api/autor/:id', autorController.update);
+route.delete('/api/autor/:id', autorController.delete);
+
+//Rotas Aluno
+
+route.post('/api/aluno', alunoController.create);
+route.get('/api/aluno', alunoController.find);
+route.put('/api/aluno/:id', alunoController.update);
+route.delete('/api/aluno/:id', alunoController.delete);
+
+//Rotas Livro
+
+route.post('/api/livro', livroController.create);
+route.get('/api/livro', livroController.find);
+route.put('/api/livro/:id', livroController.update);
+route.delete('/api/livro/:id', livroController.delete);
+
+//Rotas Locação
+
+route.post('/api/locacao', locacaoController.create);
+route.get('/api/locacao', locacaoController.find);
+route.put('/api/locacao/:id', locacaoController.update);
+route.delete('/api/locacao/:id', locacaoController.delete);
+
 
 module.exports = route
