@@ -178,3 +178,7 @@ table{
 .th-acoes{
     width: 8vw;
 }
+
+.campo-required{
+    color: red;
+}
