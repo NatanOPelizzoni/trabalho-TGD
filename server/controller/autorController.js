@@ -11,7 +11,7 @@ exports.create = (req, res) => {
         return;
     }
 
-    //novo usuario
+    //novo autor
     const autor = new AutorDB({
         nome: req.body.nome
     });
