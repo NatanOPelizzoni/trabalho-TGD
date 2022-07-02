@@ -1,14 +1,17 @@
-<tr>
-    <td>1</td>
-    <td>Aluno 1</td>
-    <td>Autor 1</td>
-    <td>01/01/2000</td>
-    <td>
-        <a href="/update_locacao" class="btn border-shadow update">
-            <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
-        </a>
-        <a href="#" class="btn border-shadow delete">
-            <span class="text-gradient"><i class="fas fa-trash-alt"></i></span>
-        </a>
-    </td>
-</tr>
+<% for(var i = 0; i < locacoes.length; i++){ %>
+    <tr>
+        <td><%= i+1 %></td>
+        <td><%= alunos[alunos.map(function(e) { return e._id; }).indexOf(locacoes[i].alunoId)].nome; %></td>
+        <td><%= livros[livros.map(function(e) { return e._id; }).indexOf(locacoes[i].livroId)].titulo; %></td>
+        <td><%= new Date(locacoes[i].dataretirada).toISOString().split('T')[0].split("-").reverse().join("/") %></td>
+
+        <td>
+            <a href="/update_locacao" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a href="#" class="btn border-shadow delete">
+                <span class="text-gradient"><i class="fas fa-trash-alt"></i></span>
+            </a>
+        </td>
+    </tr>
+<% } %>

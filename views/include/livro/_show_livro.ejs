@@ -1,16 +1,20 @@
-<tr>
-    <td>1</td>
-    <td>Livro 1</td>
-    <td>50</td>
-    <td>Drama, Terror, SuspenseDrama, Terror, SuspenseDrama, Terror, SuspenseDrama, Terror, SuspenseDrama, Terror, SuspenseDrama, Terror, Suspense</td>
-    <td>Autor 1</td>
-    <td>01/01/2000</td>
-    <td>
-        <a href="/update_livro" class="btn border-shadow update">
-            <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
-        </a>
-        <a href="#" class="btn border-shadow delete">
-            <span class="text-gradient"><i class="fas fa-trash-alt"></i></span>
-        </a>
-    </td>
-</tr>
+<% for(var i = 0; i < livros.length; i++){ %>
+    <tr>
+        <td><%= i+1 %></td>
+        <td><%= livros[i].titulo %></td>
+        <td><%= livros[i].paginas %></td>
+        <td><%= livros[i].genero %></td>
+
+        <td><%= autores[autores.map(function(e) { return e._id; }).indexOf(livros[i].autorId)].nome; %></td>
+
+        <td><%= new Date(livros[i].datalancamento).toISOString().split('T')[0].split("-").reverse().join("/") %></td>
+        <td>
+            <a href="/update_livro" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a href="#" class="btn border-shadow delete">
+                <span class="text-gradient"><i class="fas fa-trash-alt"></i></span>
+            </a>
+        </td>
+    </tr>
+<% } %>
