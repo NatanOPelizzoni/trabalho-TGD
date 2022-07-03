@@ -7,7 +7,6 @@
 
         <td><%= autores[autores.map(function(e) { return e._id; }).indexOf(livros[i].autorId)].nome; %></td>
 
-        <td><%= new Date(livros[i].datalancamento).toISOString().split('T')[0].split("-").reverse().join("/") %></td>
         <td>
             <a href="/update_livro" class="btn border-shadow update">
                 <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>

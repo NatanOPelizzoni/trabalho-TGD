@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb')
 var LivroDB = require('../model/livroModel');
 const { livro } = require('../services/render');
 
@@ -16,8 +17,10 @@ exports.create = (req, res) => {
         titulo: req.body.titulo,
         paginas: req.body.paginas,
         genero: req.body.genero,
-        autorId: req.body.autorId
+        autorId: new ObjectId(req.body.autorId)
     });
+
+    console.log(livro);
 
     //salva livro no banco de dados
     livro

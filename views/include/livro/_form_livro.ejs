@@ -17,18 +17,13 @@
         </div>
         
         <div class="form-group">
-            <label for="autor" class="text-light">Autor <span class="campo-required">*</span></label>
-            <select name="autor" id="autorId">
+            <label for="autorId" class="text-light">Autor <span class="campo-required">*</span></label>
+            <select name="autorId" id="autorId">
                 <option value="">Selecione</option>
                 <% for(var i = 0; i < autores.length; i++){ %>
                     <option value="<%= autores[i]._id; %>"><%= autores[i].nome; %></option>
                 <% } %>
             </select>
-        </div>
-
-        <div class="form-group">
-            <label for="datalancamento" class="text-light">Data Lançamento</label>
-            <input type="date" name="datalancamento" id="datalancamento" value="">
         </div>
 
         <div class="form-group">

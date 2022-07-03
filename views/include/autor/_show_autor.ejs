@@ -3,7 +3,7 @@
         <td><%= i+1 %></td>
         <td><%= autores[i].nome %></td>
         <td>
-            <a href="/update_autor" class="btn border-shadow update">
+            <a href="/update_autor?id=<%= autores[i]._id %>" class="btn border-shadow update">
                 <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
             </a>
             <a href="#" class="btn border-shadow delete">
