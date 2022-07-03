@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     aluno
     .save(aluno)
     .then(data => {
-        res.send(data);
+        // res.send(data);
+        res.redirect('/add_aluno');
     })
     .catch(err => {
         res.status(500).send({

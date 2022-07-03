@@ -20,7 +20,8 @@ exports.create = (req, res) => {
     autor
     .save(autor)
     .then(data => {
-        res.send(data);
+        // res.send(data);
+        res.redirect('/add_autor');
     })
     .catch(err => {
         res.status(500).send({

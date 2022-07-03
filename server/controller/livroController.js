@@ -23,7 +23,8 @@ exports.create = (req, res) => {
     livro
     .save(livro)
     .then(data => {
-        res.send(data);
+        // res.send(data);
+        res.redirect('/add_livro');
     })
     .catch(err => {
         res.status(500).send({

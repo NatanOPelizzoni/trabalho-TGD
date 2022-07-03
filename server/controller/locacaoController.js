@@ -22,7 +22,8 @@ exports.create = (req, res) => {
     locacao
     .save(locacao)
     .then(data => {
-        res.send(data);
+        // res.send(data);
+        res.redirect('/add_locacao');
     })
     .catch(err => {
         res.status(500).send({
