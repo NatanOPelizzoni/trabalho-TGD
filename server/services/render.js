@@ -1,6 +1,10 @@
 const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config({path: 'config.env'});
+const URL_API = process.env.URL_API;
 
 exports.index = function(req, res){
+    console.log(URL_API+'/autor');
     res.render('index');
 }
 
@@ -8,7 +12,7 @@ exports.index = function(req, res){
 
 exports.autor = function(req, res){
     //Fazendo uma requisicao GET para /api/autor
-    axios.get('http://localhost:3000/api/autor')
+    axios.get(URL_API+'/autor')
     .then(function(response){
         // console.log(response.config.method);
         console.log(response.data);
@@ -30,7 +34,7 @@ exports.update_autor = function(req, res){
 
 exports.aluno = function(req, res){
     //Fazendo uma requisicao GET para /api/aluno
-    axios.get('http://localhost:3000/api/aluno')
+    axios.get(URL_API+'/aluno')
     .then(function(response){
         console.log(response.data);
         res.render('aluno', {alunos: response.data});
@@ -52,10 +56,10 @@ exports.update_aluno = function(req, res){
 exports.livro = function(req, res){
     //Fazendo uma requisicao GET para /api/livro
     var autores = [];
-    axios.get('http://localhost:3000/api/autor').then(function(response){
+    axios.get(URL_API+'/autor').then(function(response){
         autores = response.data;
     });
-    axios.get('http://localhost:3000/api/livro')
+    axios.get(URL_API+'/livro')
     .then(function(response){
         console.log(response.data);
         res.render('livro', {livros: response.data, autores: autores});
@@ -65,7 +69,7 @@ exports.livro = function(req, res){
 }
 
 exports.add_livro = function(req, res){
-    axios.get('http://localhost:3000/api/autor')
+    axios.get(URL_API+'/autor')
     .then(function(response){
         res.render('add_livro', {autores: response.data});
     }).catch((err) => {
@@ -84,15 +88,15 @@ exports.locacao = function(req, res){
     var alunos = [];
     var livros = [];
 
-    axios.get('http://localhost:3000/api/aluno').then(function(response){
+    axios.get(URL_API+'/aluno').then(function(response){
         alunos = response.data;
     });
 
-    axios.get('http://localhost:3000/api/livro').then(function(response){
+    axios.get(URL_API+'/livro').then(function(response){
         livros = response.data;
     });
 
-    axios.get('http://localhost:3000/api/locacao')
+    axios.get(URL_API+'/locacao')
     .then(function(response){
         console.log(response.data);
         res.render('locacao', {locacoes: response.data, alunos: alunos, livros: livros});
@@ -103,10 +107,10 @@ exports.locacao = function(req, res){
 
 exports.add_locacao = function(req, res){
     var alunos = [];
-    axios.get('http://localhost:3000/api/aluno').then(function(response){
+    axios.get(URL_API+'/aluno').then(function(response){
         alunos = response.data;
     });
-    axios.get('http://localhost:3000/api/livro')
+    axios.get(URL_API+'/livro')
     .then(function(response){
         res.render('add_locacao', {alunos: alunos, livros: response.data});
     }).catch((err) => {
