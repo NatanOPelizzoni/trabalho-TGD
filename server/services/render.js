@@ -58,6 +58,9 @@ exports.livro = function(req, res){
     var autores = [];
     axios.get(URL_API+'/autor').then(function(response){
         autores = response.data;
+    })
+    .catch((err) => {
+        res.send(err);
     });
     axios.get(URL_API+'/livro')
     .then(function(response){
@@ -90,10 +93,16 @@ exports.locacao = function(req, res){
 
     axios.get(URL_API+'/aluno').then(function(response){
         alunos = response.data;
+    })
+    .catch((err) => {
+        res.send(err);
     });
 
     axios.get(URL_API+'/livro').then(function(response){
         livros = response.data;
+    })
+    .catch((err) => {
+        res.send(err);
     });
 
     axios.get(URL_API+'/locacao')
