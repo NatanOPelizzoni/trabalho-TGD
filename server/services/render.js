@@ -65,7 +65,12 @@ exports.livro = function(req, res){
 }
 
 exports.add_livro = function(req, res){
-    res.render('add_livro');
+    axios.get('http://localhost:3000/api/autor')
+    .then(function(response){
+        res.render('add_livro', {autores: response.data});
+    }).catch((err) => {
+        res.send(err);
+    });
 }
 
 exports.update_livro = function(req, res){
@@ -97,7 +102,16 @@ exports.locacao = function(req, res){
 }
 
 exports.add_locacao = function(req, res){
-    res.render('add_locacao');
+    var alunos = [];
+    axios.get('http://localhost:3000/api/aluno').then(function(response){
+        alunos = response.data;
+    });
+    axios.get('http://localhost:3000/api/livro')
+    .then(function(response){
+        res.render('add_locacao', {alunos: alunos, livros: response.data});
+    }).catch((err) => {
+        res.send(err);
+    });
 }
 
 exports.update_locacao = function(req, res){
