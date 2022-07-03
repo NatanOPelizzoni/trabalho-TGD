@@ -1,6 +1,8 @@
 const { ObjectId } = require('mongodb')
-var LivroDB = require('../model/livroModel');
 const { livro } = require('../services/render');
+var LivroDB = require('../model/livroModel');
+
+const livroService = require('../services/livroService');
 
 //Cria e salva um novo livro
 exports.create = (req, res) => {
@@ -41,23 +43,23 @@ exports.find = (req, res) => {
     if(req.query.id){
         const id = req.query.id;
 
-        LivroDB.findById(id)
-            .then(data => {
-                if(!data){
-                    res.status(404).send({
-                        message: `Não foi encontrado o livro com o id ${id}`
-                    });
-                }else{
-                    res.send(data);
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: `Um erro ocorreu enquanto tentava pegar as informações do livro pelo id ${id}`
+        livroService.findById(id)
+        .then(data => {
+            if(!data){
+                res.status(404).send({
+                    message: `Não foi encontrado o livro com o id ${id}`
                 });
+            }else{
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Um erro ocorreu enquanto tentava pegar as informações do livro pelo id ${id}`
             });
+        });
     }else{
-        LivroDB.find()
+        livroService.findAll()
         .then(livro => {
             res.send(livro);
         })

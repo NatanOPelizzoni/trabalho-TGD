@@ -3,6 +3,9 @@ const dotenv = require('dotenv');
 dotenv.config({path: 'config.env'});
 const URL_API = process.env.URL_API;
 
+const autorService = require('../services/autorService');
+const livroService = require('../services/livroService');
+
 exports.index = function(req, res){
     console.log(URL_API+'/autor');
     res.render('index');
@@ -53,22 +56,14 @@ exports.update_aluno = function(req, res){
 
 //Exports Livro
 
-exports.livro = function(req, res){
+exports.livro = async function(req, res){
     //Fazendo uma requisicao GET para /api/livro
-    var autores = [];
-    axios.get(URL_API+'/autor').then(function(response){
-        autores = response.data;
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-    axios.get(URL_API+'/livro')
-    .then(function(response){
-        console.log(response.data);
-        res.render('livro', {livros: response.data, autores: autores});
-    }).catch((err) => {
-        res.send(err);
-    });
+    var autores = await autorService.findAll();
+    var livros = await livroService.findAll();
+
+    if(livros && autores){
+        res.render('livro', {livros: livros, autores: autores});
+    }
 }
 
 exports.add_livro = function(req, res){

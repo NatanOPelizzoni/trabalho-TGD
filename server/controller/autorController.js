@@ -1,6 +1,8 @@
 var AutorDB = require('../model/autorModel');
 const { autor } = require('../services/render');
 
+const autorService = require('../services/autorService');
+
 //Cria e salva um novo autor
 exports.create = (req, res) => {
     //valida requisição
@@ -36,24 +38,25 @@ exports.find = (req, res) => {
     if(req.query.id){
         const id = req.query.id;
 
-        AutorDB.findById(id)
-            .then(data => {
-                if(!data){
-                    res.status(404).send({
-                        message: `Não foi encontrado o autor com o id ${id}`
-                    });
-                }else{
-                    res.send(data);
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: `Um erro ocorreu enquanto tentava pegar as informações do autor pelo id ${id}`
+        autorService.findById(id)
+        .then(data => {
+            if(!data){
+                res.status(404).send({
+                    message: `Não foi encontrado o autor com o id ${id}`
                 });
+            }else{
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Um erro ocorreu enquanto tentava pegar as informações do autor pelo id ${id}`
             });
+        });
     }else{
-        AutorDB.find()
+        autorService.findAll()
         .then(autor => {
+            console.log(autor);
             res.send(autor);
         })
         .catch(err => {

@@ -5,7 +5,7 @@
         <td><%= livros[i].paginas %></td>
         <td><%= livros[i].genero %></td>
 
-        <td><%= autores[autores.map(function(e) { return e._id; }).indexOf(livros[i].autorId)].nome; %></td>
+        <td><%= autores.find((autor) => autor._id.toString() == livros[i].autorId.toString()).nome %></td>
 
         <td>
             <a href="/update_livro" class="btn border-shadow update">
