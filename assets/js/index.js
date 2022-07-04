@@ -23,7 +23,6 @@ $('#update_autor').submit(function(event){
     });
 });
 
-
 $('#add_aluno').submit(function(event){ 
     alert('Aluno salvo com sucesso!');
 });
@@ -92,3 +91,20 @@ $('#update_locacao').submit(function(event){
         alert('Locação editada com sucesso!');
     });
 });
+
+$('.table tbody td a.delete').on('click', function(){
+    var id =  $(this).attr('data-id');
+    var tela =  $(this).attr('data-tela');
+
+    var request = {
+        'url': `${URL_API}/${tela}/${id}`,
+        'method': 'DELETE'
+    }
+    
+    if(confirm('Você realmente deseja deletar esse registro?')){
+        $.ajax(request).done(function(response){
+            alert(`${tela} deleto(a) com sucesso!`);
+            location.reload();
+        });
+    }
+})
