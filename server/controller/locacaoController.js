@@ -1,5 +1,7 @@
-var LocacaoDB = require('../model/locacaoModel');
 const { locacao } = require('../services/render');
+const { ObjectId } = require('mongodb')
+
+const locacaoService = require('../services/locacaoService');
 
 //Cria e salva uma nova locação
 exports.create = (req, res) => {
@@ -11,18 +13,16 @@ exports.create = (req, res) => {
         return;
     }
 
-    //nova locação
-    const locacao = new LocacaoDB({
-        alunoId: req.body.alunoId,
-        livroId: req.body.livroId,
+    //Cria objeto com os dados
+    const dados = {
+        alunoId: new ObjectId(req.body.alunoId),
+        livroId: new ObjectId(req.body.livroId),
         dataretirada: req.body.dataretirada
-    });
+    };
 
     //salva locação no banco de dados
-    locacao
-    .save(locacao)
+    locacaoService.add(dados)
     .then(data => {
-        // res.send(data);
         res.redirect('/add_locacao');
     })
     .catch(err => {
@@ -37,23 +37,23 @@ exports.find = (req, res) => {
     if(req.query.id){
         const id = req.query.id;
 
-        LocacaoDB.findById(id)
-            .then(data => {
-                if(!data){
-                    res.status(404).send({
-                        message: `Não foi encontrado a locação com o id ${id}`
-                    });
-                }else{
-                    res.send(data);
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: `Um erro ocorreu enquanto tentava pegar as informações da locação pelo id ${id}`
+        locacaoService.findById(id)
+        .then(data => {
+            if(!data){
+                res.status(404).send({
+                    message: `Não foi encontrado a locação com o id ${id}`
                 });
+            }else{
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Um erro ocorreu enquanto tentava pegar as informações da locação pelo id ${id}`
             });
+        });
     }else{
-        LocacaoDB.find()
+        locacaoService.findAll()
         .then(locacao => {
             res.send(locacao);
         })
@@ -74,7 +74,15 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-    LocacaoDB.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+
+    //Cria objeto com os dados
+    const dados = {
+        alunoId: new ObjectId(req.body.alunoId),
+        livroId: new ObjectId(req.body.livroId),
+        dataretirada: Date(req.body.dataretirada)
+    };
+
+    locacaoService.findByIdAndUpdate(id, dados)
     .then(data => {
         if(!data){
             res.status(404).send({
@@ -95,7 +103,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    LocacaoDB.findByIdAndDelete(id)
+    locacaoService.findByIdAndDelete(id)
     .then(data => {
         if(!data){
             res.status(404).send({

@@ -1,8 +1,11 @@
 <% for(var i = 0; i < locacoes.length; i++){ %>
     <tr>
         <td><%= i+1 %></td>
-        <td><%= alunos[alunos.map(function(e) { return e._id; }).indexOf(locacoes[i].alunoId)].nome; %></td>
-        <td><%= livros[livros.map(function(e) { return e._id; }).indexOf(locacoes[i].livroId)].titulo; %></td>
+
+        <td><%= alunos.find((aluno) => aluno._id.toString() == locacoes[i].alunoId.toString()).nome %></td>
+
+        <td><%= livros.find((livro) => livro._id.toString() == locacoes[i].livroId.toString()).titulo %></td>
+
         <td><%= new Date(locacoes[i].dataretirada).toISOString().split('T')[0].split("-").reverse().join("/") %></td>
 
         <td>

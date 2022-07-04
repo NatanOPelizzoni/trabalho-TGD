@@ -3,8 +3,8 @@
         <input type="hidden" name="id" id="id" value="">
 
         <div class="form-group">
-            <label for="aluno" class="text-light">Aluno <span class="campo-required">*</span></label>
-            <select name="aluno" id="alunoId">
+            <label for="alunoId" class="text-light">Aluno <span class="campo-required">*</span></label>
+            <select name="alunoId" id="alunoId">
                 <option value="">Selecione</option>
                 <% for(var i = 0; i < alunos.length; i++){ %>
                     <option value="<%= alunos[i]._id; %>"><%= alunos[i].nome; %></option>
@@ -13,8 +13,8 @@
         </div>
 
         <div class="form-group">
-            <label for="livro" class="text-light">Livro <span class="campo-required">*</span></label>
-            <select name="livro" id="livroId">
+            <label for="livroId" class="text-light">Livro <span class="campo-required">*</span></label>
+            <select name="livroId" id="livroId">
                 <option value="">Selecione</option>
                 <% for(var i = 0; i < livros.length; i++){ %>
                     <option value="<%= livros[i]._id; %>"><%= livros[i].titulo; %></option>

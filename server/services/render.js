@@ -4,25 +4,24 @@ dotenv.config({path: 'config.env'});
 const URL_API = process.env.URL_API;
 
 const autorService = require('../services/autorService');
+const alunoService = require('../services/alunoService');
 const livroService = require('../services/livroService');
+const locacaoService = require('../services/locacaoService');
 
 exports.index = function(req, res){
-    console.log(URL_API+'/autor');
     res.render('index');
 }
 
 //Exports Autor
 
-exports.autor = function(req, res){
-    //Fazendo uma requisicao GET para /api/autor
-    axios.get(URL_API+'/autor')
-    .then(function(response){
-        // console.log(response.config.method);
-        console.log(response.data);
-        res.render('autor', {autores: response.data});
-    }).catch((err) => {
-        res.send(err);
-    });
+exports.autor = async function(req, res){
+    var autores = await autorService.findAll();
+
+    if(autores){
+        res.render('autor', {autores: autores});
+    }else{
+        res.send('Autores está indefinido');
+    }
 }
 
 exports.add_autor = function(req, res){
@@ -35,15 +34,14 @@ exports.update_autor = function(req, res){
 
 //Exports Aluno
 
-exports.aluno = function(req, res){
-    //Fazendo uma requisicao GET para /api/aluno
-    axios.get(URL_API+'/aluno')
-    .then(function(response){
-        console.log(response.data);
-        res.render('aluno', {alunos: response.data});
-    }).catch((err) => {
-        res.send(err);
-    });
+exports.aluno = async function(req, res){
+    var alunos = await alunoService.findAll();
+
+    if(alunos){
+        res.render('aluno', {alunos: alunos});
+    }else{
+        res.send('Autores está indefinido');
+    }
 }
 
 exports.add_aluno = function(req, res){
@@ -57,22 +55,24 @@ exports.update_aluno = function(req, res){
 //Exports Livro
 
 exports.livro = async function(req, res){
-    //Fazendo uma requisicao GET para /api/livro
     var autores = await autorService.findAll();
     var livros = await livroService.findAll();
 
     if(livros && autores){
         res.render('livro', {livros: livros, autores: autores});
+    }else{
+        res.send('Autores ou Livros está indefinido');
     }
 }
 
-exports.add_livro = function(req, res){
-    axios.get(URL_API+'/autor')
-    .then(function(response){
-        res.render('add_livro', {autores: response.data});
-    }).catch((err) => {
-        res.send(err);
-    });
+exports.add_livro = async function(req, res){
+    var autores = await autorService.findAll();
+
+    if(autores){
+        res.render('add_livro', {autores: autores});
+    }else{
+        res.send('Autores está indefinido');
+    }
 }
 
 exports.update_livro = function(req, res){
@@ -81,32 +81,16 @@ exports.update_livro = function(req, res){
 
 //Exports Locação
 
-exports.locacao = function(req, res){
-    //Fazendo uma requisicao GET para /api/locacao
-    var alunos = [];
-    var livros = [];
+exports.locacao = async function(req, res){
+    var locacoes = await locacaoService.findAll();
+    var alunos = await alunoService.findAll();
+    var livros = await livroService.findAll();
 
-    axios.get(URL_API+'/aluno').then(function(response){
-        alunos = response.data;
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-
-    axios.get(URL_API+'/livro').then(function(response){
-        livros = response.data;
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-
-    axios.get(URL_API+'/locacao')
-    .then(function(response){
-        console.log(response.data);
-        res.render('locacao', {locacoes: response.data, alunos: alunos, livros: livros});
-    }).catch((err) => {
-        res.send(err);
-    });
+    if(locacoes && alunos && livros){
+        res.render('locacao', {locacoes: locacoes, alunos: alunos, livros: livros});
+    }else{
+        res.send('Locações ou Alunos ou Livros está indefinido');
+    }
 }
 
 exports.add_locacao = function(req, res){

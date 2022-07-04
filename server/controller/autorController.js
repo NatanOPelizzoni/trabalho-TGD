@@ -1,6 +1,4 @@
-var AutorDB = require('../model/autorModel');
 const { autor } = require('../services/render');
-
 const autorService = require('../services/autorService');
 
 //Cria e salva um novo autor
@@ -8,33 +6,30 @@ exports.create = (req, res) => {
     //valida requisição
     if(!req.body){
         res.status(400).send({
-            message: "Conteudo não pode ser vazio!"
+            message: "Conteúdo não pode ser vazio!"
         });
         return;
     }
 
-    //novo autor
-    const autor = new AutorDB({
+    //Cria objeto com os dados
+    const dados = {
         nome: req.body.nome
-    });
+    };
 
-    //salva autor no banco de dados
-    autor
-    .save(autor)
+    //Salva no banco
+    autorService.add(dados)
     .then(data => {
-        // res.send(data);
         res.redirect('/add_autor');
     })
     .catch(err => {
         res.status(500).send({
-            message: err.message || "Algum erro aconteceu enquanto criava a operação de criar"
+            message: err.message || "Algum erro aconteceu na tentiva de salvar no banco!"
         });
     })
 }
 
 //Busca e retorna todos os autores / Busca e retorna um único autor
 exports.find = (req, res) => {
-
     if(req.query.id){
         const id = req.query.id;
 
@@ -56,7 +51,6 @@ exports.find = (req, res) => {
     }else{
         autorService.findAll()
         .then(autor => {
-            console.log(autor);
             res.send(autor);
         })
         .catch(err => {
@@ -76,7 +70,7 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-    AutorDB.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    autorService.findByIdAndUpdate(id, req.body)
     .then(data => {
         if(!data){
             res.status(404).send({
@@ -97,7 +91,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    AutorDB.findByIdAndDelete(id)
+    autorService.findByIdAndDelete(id)
     .then(data => {
         if(!data){
             res.status(404).send({

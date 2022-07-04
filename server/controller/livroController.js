@@ -1,6 +1,5 @@
 const { ObjectId } = require('mongodb')
 const { livro } = require('../services/render');
-var LivroDB = require('../model/livroModel');
 
 const livroService = require('../services/livroService');
 
@@ -14,21 +13,17 @@ exports.create = (req, res) => {
         return;
     }
 
-    //novo livro
-    const livro = new LivroDB({
+    //Cria objeto com os dados
+    const dados = {
         titulo: req.body.titulo,
         paginas: req.body.paginas,
         genero: req.body.genero,
         autorId: new ObjectId(req.body.autorId)
-    });
+    };
 
-    console.log(livro);
-
-    //salva livro no banco de dados
-    livro
-    .save(livro)
+    //Salva no banco
+    livroService.add(dados)
     .then(data => {
-        // res.send(data);
         res.redirect('/add_livro');
     })
     .catch(err => {
@@ -79,8 +74,16 @@ exports.update = (req, res) => {
         });
     }
 
+    //Cria objeto com os dados
+    const dados = {
+        titulo: req.body.titulo,
+        paginas: req.body.paginas,
+        genero: req.body.genero,
+        autorId: new ObjectId(req.body.autorId)
+    };
+
     const id = req.params.id;
-    LivroDB.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    livroService.findByIdAndUpdate(id, dados)
     .then(data => {
         if(!data){
             res.status(404).send({
@@ -101,7 +104,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    LivroDB.findByIdAndDelete(id)
+    livroService.findByIdAndDelete(id)
     .then(data => {
         if(!data){
             res.status(404).send({

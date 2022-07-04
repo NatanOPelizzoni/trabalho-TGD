@@ -1,5 +1,5 @@
-var AlunoDB = require('../model/alunoModel');
 const { aluno } = require('../services/render');
+const alunoService = require('../services/alunoService');
 
 //Cria e salva um novo aluno
 exports.create = (req, res) => {
@@ -11,17 +11,15 @@ exports.create = (req, res) => {
         return;
     }
 
-    //novo aluno
-    const aluno = new AlunoDB({
+    //Cria objeto com os dados
+    const dados = {
         nome: req.body.nome,
         matricula: req.body.matricula
-    });
+    };
 
-    //salva aluno no banco de dados
-    aluno
-    .save(aluno)
+    //Salva no banco
+    alunoService.add(dados)
     .then(data => {
-        // res.send(data);
         res.redirect('/add_aluno');
     })
     .catch(err => {
@@ -36,23 +34,23 @@ exports.find = (req, res) => {
     if(req.query.id){
         const id = req.query.id;
 
-        AlunoDB.findById(id)
-            .then(data => {
-                if(!data){
-                    res.status(404).send({
-                        message: `Não foi encontrado o aluno com o id ${id}`
-                    });
-                }else{
-                    res.send(data);
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: `Um erro ocorreu enquanto tentava pegar as informações do aluno pelo id ${id}`
+        alunoService.findById(id)
+        .then(data => {
+            if(!data){
+                res.status(404).send({
+                    message: `Não foi encontrado o aluno com o id ${id}`
                 });
+            }else{
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Um erro ocorreu enquanto tentava pegar as informações do aluno pelo id ${id}`
             });
+        });
     }else{
-        AlunoDB.find()
+        alunoService.findAll()
         .then(aluno => {
             res.send(aluno);
         })
@@ -60,7 +58,7 @@ exports.find = (req, res) => {
             res.status(500).send({
                 message: err.message || "Um erro ocorreu enquanto tentava pegar as informações do aluno"
             });
-        })
+        });
     }
 }
 
@@ -73,7 +71,7 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-    AlunoDB.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    alunoService.findByIdAndUpdate(id, req.body)
     .then(data => {
         if(!data){
             res.status(404).send({
@@ -94,7 +92,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    AlunoDB.findByIdAndDelete(id)
+    alunoService.findByIdAndDelete(id)
     .then(data => {
         if(!data){
             res.status(404).send({
