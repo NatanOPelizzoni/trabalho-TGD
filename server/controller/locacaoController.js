@@ -79,7 +79,7 @@ exports.update = (req, res) => {
     const dados = {
         alunoId: new ObjectId(req.body.alunoId),
         livroId: new ObjectId(req.body.livroId),
-        dataretirada: Date(req.body.dataretirada)
+        dataretirada: req.body.dataretirada
     };
 
     locacaoService.findByIdAndUpdate(id, dados)

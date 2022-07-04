@@ -9,13 +9,13 @@ exports.findById = async (id) => {
 }
 
 exports.add = async (dados) => {
-    await new AutorDB(dados).save();
+    return await AutorDB(dados).save();
 }
 
 exports.findByIdAndUpdate = async (id, dados) => {
-    await new AutorDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
+    return await AutorDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
 }
 
 exports.findByIdAndDelete = async (id) => {
-    await new AutorDB.findByIdAndDelete(id)
+    return await AutorDB.findByIdAndDelete(id)
 }

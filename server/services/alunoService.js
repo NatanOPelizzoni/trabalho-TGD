@@ -9,13 +9,13 @@ exports.findById = async (id) => {
 }
 
 exports.add = async (dados) => {
-    await new AlunoDB(dados).save();
+    return await AlunoDB(dados).save();
 }
 
 exports.findByIdAndUpdate = async (id, dados) => {
-    await new AlunoDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
+    return await AlunoDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
 }
 
 exports.findByIdAndDelete = async (id) => {
-    await new AlunoDB.findByIdAndDelete(id)
+    return await AlunoDB.findByIdAndDelete(id)
 }

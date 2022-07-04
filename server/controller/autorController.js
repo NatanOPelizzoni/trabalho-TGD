@@ -62,7 +62,7 @@ exports.find = (req, res) => {
 }
 
 //Atualizar autor pelo id
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
     if(!req.body){
         return res.status(400).send({
             message: "Infomações para atualizar não podem estarem vazias"
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-    autorService.findByIdAndUpdate(id, req.body)
+    await autorService.findByIdAndUpdate(id, req.body)
     .then(data => {
         if(!data){
             res.status(404).send({

@@ -1,13 +1,13 @@
-<form action="/api/locacao" method="POST" id="<%- acao %>_locacao">
+<form <%= id ? '' : 'action=/api/locacao' %> method="POST" id="<%- acao %>_locacao">
     <div class="form_locacao">
-        <input type="hidden" name="id" id="id" value="">
+        <input type="hidden" name="id" id="id" value="<%= id ? id : '' %>">
 
         <div class="form-group">
             <label for="alunoId" class="text-light">Aluno <span class="campo-required">*</span></label>
             <select name="alunoId" id="alunoId">
                 <option value="">Selecione</option>
                 <% for(var i = 0; i < alunos.length; i++){ %>
-                    <option value="<%= alunos[i]._id; %>"><%= alunos[i].nome; %></option>
+                    <option <%= locacao ? (locacao.alunoId.toString() == alunos[i]._id.toString() ? 'selected' : '') : '' %> value="<%= alunos[i]._id; %>"><%= alunos[i].nome; %></option>
                 <% } %>
             </select>
         </div>
@@ -17,14 +17,14 @@
             <select name="livroId" id="livroId">
                 <option value="">Selecione</option>
                 <% for(var i = 0; i < livros.length; i++){ %>
-                    <option value="<%= livros[i]._id; %>"><%= livros[i].titulo; %></option>
+                    <option <%= locacao ? (locacao.livroId.toString() == livros[i]._id.toString() ? 'selected' : '') : '' %> value="<%= livros[i]._id; %>"><%= livros[i].titulo; %></option>
                 <% } %>
             </select>
         </div>
 
         <div class="form-group">
             <label for="dataretirada" class="text-light">Data Retirada <span class="campo-required">*</span></label>
-            <input type="date" name="dataretirada" id="dataretirada" value="">
+            <input type="date" name="dataretirada" id="dataretirada" value="<%= locacao ? new Date(locacao.dataretirada).toISOString().split('T')[0] : '' %>">
         </div>
 
         <div class="form-group">

@@ -9,13 +9,13 @@ exports.findById = async (id) => {
 }
 
 exports.add = async (dados) => {
-    await new LocacaoDB(dados).save();
+    return await LocacaoDB(dados).save();
 }
 
 exports.findByIdAndUpdate = async (id, dados) => {
-    await new LocacaoDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
+    return await LocacaoDB.findByIdAndUpdate(id, dados, { useFindAndModify: false });
 }
 
 exports.findByIdAndDelete = async (id) => {
-    await new LocacaoDB.findByIdAndDelete(id)
+    return await LocacaoDB.findByIdAndDelete(id)
 }
