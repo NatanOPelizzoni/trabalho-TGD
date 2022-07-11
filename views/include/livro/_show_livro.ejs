@@ -5,7 +5,7 @@
         <td><%= livros[i].paginas %></td>
         <td><%= livros[i].genero %></td>
 
-        <td><%= autores.find((autor) => autor._id.toString() == livros[i].autorId.toString()).nome %></td>
+        <td><%= autores.some(e => e._id.toString() == livros[i].autorId.toString()) ? autores.find((autor) => autor._id.toString() == livros[i].autorId.toString()).nome : 'Autor não encontrado' %></td>
 
         <td>
             <a href="/update_livro?id=<%= livros[i]._id %>" class="btn border-shadow update">

@@ -2,9 +2,9 @@
     <tr>
         <td><%= i+1 %></td>
 
-        <td><%= alunos.find((aluno) => aluno._id.toString() == locacoes[i].alunoId.toString()).nome %></td>
-
-        <td><%= livros.find((livro) => livro._id.toString() == locacoes[i].livroId.toString()).titulo %></td>
+        <td><%= alunos.some(e => e._id.toString() == locacoes[i].alunoId.toString()) ? alunos.find((aluno) => aluno._id.toString() == locacoes[i].alunoId.toString()).nome : 'Aluno não encontrado' %></td>
+        
+        <td><%= livros.some(e => e._id.toString() == locacoes[i].livroId.toString()) ? livros.find((livro) => livro._id.toString() == locacoes[i].livroId.toString()).titulo : 'Livro não encontrado' %></td>
 
         <td><%= new Date(locacoes[i].dataretirada).toISOString().split('T')[0].split("-").reverse().join("/") %></td>
 
